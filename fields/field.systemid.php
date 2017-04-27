@@ -75,10 +75,16 @@
 		public function displayPublishPanel(XMLElement &$wrapper, $data = null, $flagWithError = null, $fieldnamePrefix = null, $fieldnamePostfix = null, $entry_id = null)
 		{
 			$label = Widget::Label($this->get('label'));
-			$text = new XMLElement('div', $entry_id);
+			$label->appendChild(
+				Widget::Input(
+					"systemid",
+					$entry_id.'',
+					'text',
+					array('readonly' => 'readonly')
+				)
+			);
 
 			$wrapper->appendChild($label);
-			$label->appendChild($text);
 		}
 
 	/*-------------------------------------------------------------------------
