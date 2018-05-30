@@ -2,6 +2,8 @@
 
 	if (!defined('__IN_SYMPHONY__')) die('<h2>Symphony Error</h2><p>You cannot directly access this file</p>');
 
+	require_once EXTENSIONS . '/systemidfield/lib/class.entryquerysystemidadapter.php';
+
 	class FieldSystemId extends Field
 	{
 	/*-------------------------------------------------------------------------
@@ -11,6 +13,7 @@
 		public function __construct()
 		{
 			parent::__construct();
+			$this->entryQueryFieldAdapter = new EntryQuerySystemIdAdapter($this);
 
 			$this->_name = __('System Id');
 			$this->_required = false;

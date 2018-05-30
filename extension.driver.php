@@ -8,21 +8,33 @@
 
 		public function uninstall()
 		{
-			Symphony::Database()->query("DROP TABLE `tbl_fields_systemid`");
+			Symphony::Database()
+				->drop('tbl_fields_systemid')
+				->ifExists()
+				->execute()
+				->success();
 		}
 
 		public function install()
 		{
-			Symphony::Database()->query("
-				CREATE TABLE IF NOT EXISTS `tbl_fields_systemid` (
-					`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-					`field_id` INT(11) UNSIGNED NOT NULL,
-					PRIMARY KEY (`id`),
-					KEY `field_id` (`field_id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-			");
-
-			return true;
+			return Symphony::Database()
+				->create('tbl_fields_systemid')
+				->ifNotExists()
+				->charset('utf8')
+				->collate('utf8_unicode_ci')
+				->fields([
+					'id' => [
+						'type' => 'int(11)',
+						'auto' => true,
+					],
+					'field_id' => 'int(11)',
+				])
+				->keys([
+					'id' => 'primary',
+					'field_id' => 'key',
+				])
+				->execute()
+				->success();
 		}
 	}
 
