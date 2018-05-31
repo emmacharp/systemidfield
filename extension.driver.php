@@ -8,7 +8,7 @@
 
 		public function uninstall()
 		{
-			Symphony::Database()
+			return Symphony::Database()
 				->drop('tbl_fields_systemid')
 				->ifExists()
 				->execute()
