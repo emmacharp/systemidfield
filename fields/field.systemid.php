@@ -76,7 +76,10 @@
 
 		public function displayPublishPanel(XMLElement &$wrapper, $data = null, $flagWithError = null, $fieldnamePrefix = null, $fieldnamePostfix = null, $entry_id = null) {
 			$label = Widget::Label($this->get('label'));
-			$label->appendChild(
+
+			$wrapper->appendChild($label);
+			$wrapper->addClass('field-value-readonly');
+			$wrapper->appendChild(
 				Widget::Input(
 					"systemid",
 					$entry_id.'',
@@ -84,8 +87,6 @@
 					array('readonly' => 'readonly')
 				)
 			);
-
-			$wrapper->appendChild($label);
 		}
 
 	/*-------------------------------------------------------------------------
